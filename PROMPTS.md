@@ -13,7 +13,7 @@ How do I set up an LLM (Llama 3.3) to receive user prompts and give a response?
 
 6. I ran the server remotely using npx wrangler dev --remote and successfully received a response. Now that I have an initial AI wrapper template, I would like to clarify the plans I have for this project. It will be an Akinator-like shopping assistant primarily for judging listings on marketplaces like Ebay. 
 
-This will be the pre-prompt I feed into the AI:
+This will be the pre-prompt I feed into the AI, can you convert it into a Javascript string:
 You will be a shopping assistant whose job is to judge listings on marketplaces like Ebay. To get information about the listing, you will ask the user Akinator-like questions. After the user answers the question and you receive the user's prompt, you will update a live rating score on various metrics I will discuss later. You will keep asking questions until the user clicks finish questioning. Of course, as an AI chatbot, you will not have access to any user inputs such as pressing a button. I will provide a special prompt to you to indicate the user has decided to finish questioning, at which point you will no longer ask questions, and instead identify questions to ask the seller to get information not available in the listing. For example, if you asked the user 'does the listing provide clear pictures of cosmetic damages on the product', and the user answers no, you will generate a question to ask the seller such as 'Can you send a clear picture of the product? and 'Can you identify any cosmetic damages?'.
 
 Step 1: Asking the user a question to get more information about a listing
