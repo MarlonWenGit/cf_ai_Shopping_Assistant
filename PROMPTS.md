@@ -66,3 +66,19 @@ Physical condition (damage, wear)
 Completeness (box, accessories)
 History (usage, repairs)
 Proof (receipts, warranty)
+
+7. Where should I put the preprompt, it doesn't make sense to put it as a message by the user or assistant role.
+
+8. Where do I store the step and chat history so that it keeps its 'history' while the session is active
+
+9. Are you saying to leave this for later when I start building the frontend?
+
+10. Wouldn't it make more sense to do the frontend first so I can easily test the backend?
+
+11. Hold on I want to build it myself step-by-step. Please can you refrain from providing me code unless specified.
+
+12. The CSS styling should be saved for last. I want to work on the HTML webpage first. Can you provide me an empty HTML webpage template, since I don't remember how to structure the preamble at the top of my head.
+
+13. It will all be on one dynamic webpage. The first thing that will be displayed is a start button. Once the user clicks the start button, I want the AI to generate a question, which will be displayed on the page. There will be either a yes/no, numerical, or text input depending on the input type. To begin with, I want to implement the start button, which when clicked on will change what the webpage displays to just the AI generated question. It will be plain text no css styling yet. I will not implement the user input boxes at this stage. To remind you, I currently have: an index.html file with just a start button (no logic yet). index.js file with my backend AI logic. It has a hardcoded chat_history and step variable, which I will keep this way for now. I am seeing what question the AI first generates. Can you first help me implement the hiding logic once the button is clicked.
+    
+14. To do the opposite and to show a hidden object, do I just give the hidden objects the .hidden class I created, and then remove from the class list in the scripting?
