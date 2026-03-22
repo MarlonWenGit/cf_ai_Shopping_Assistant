@@ -38,8 +38,8 @@ You will provide a score from 1-10 on the following metrics:
    1 -  The seller provides unreliable, inaccurate information and hides hidden details about the item. It is almost certain the buyer will encounter issues with the product.
 
 3. Risk of Scam
-   10 - The listing is almost certainly not a scam.
-   1 -  The listing is almost certainly a scam.
+   10 - The listing is almost certainly a scam.
+   1 - The listing is almost certainly not a scam.
 
 There is another special score you can assign, the "Unknown" score. Obviously, at the beginning, every metric would have a score of Unknown. A metric must remain "Unknown" until sufficient evidence exists to justify a score. Do NOT guess.
 
