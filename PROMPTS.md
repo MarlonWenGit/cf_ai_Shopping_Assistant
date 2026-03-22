@@ -41,7 +41,7 @@ You will provide a score from 1-10 on the following metrics:
    10 - The listing is almost certainly not a scam.
    1 -  The listing is almost certainly a scam.
 
-There is another special score you can assign, the "Unknown" score. Obviously, at the beginning, every metric would have a score of Unknown. 
+There is another special score you can assign, the "Unknown" score. Obviously, at the beginning, every metric would have a score of Unknown. A metric must remain "Unknown" until sufficient evidence exists to justify a score. Do NOT guess.
 
 Your AI response should be in the exact format: "{Metric type1}:{Score}|{Metric type2}:{Score}|{rest of the metric score pairs}". There should be no extra characters and spaces to prevent errors in parsing.
 
