@@ -1,23 +1,47 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { PREPROMPT, USER_QUESTION_PREPROMPT, UPDATE_RATING_PREPROMPT, SELLER_QUESTION_PREPROMPT } from "./preprompts.js";
+
+function getSystemPreprompt(step) {
+  const map = {
+    1: USER_QUESTION_PREPROMPT,
+    2: UPDATE_RATING_PREPROMPT,
+    3: SELLER_QUESTION_PREPROMPT
+  };
+
+  return PREPROMPT + map[step];
+}
 
 export default {
-	async fetch(request, env, ctx) {
-		const url = new URL(request.url);
-		switch (url.pathname) {
-			case '/message':
-				return new Response('Hello, World!');
-			case '/random':
-				return new Response(crypto.randomUUID());
-			default:
-				return new Response('Not Found', { status: 404 });
-		}
-	},
+  async fetch(request, env) {
+    if (request.method !== "POST") {
+      return new Response("Send a POST request with JSON body { prompt: '...' }", {
+        status: 405
+      });
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch (err) {
+      return new Response("Invalid JSON", { status: 400 });
+    }
+
+    const { prompt } = body;
+
+    if (!prompt) {
+      return new Response("Missing 'prompt' field", { status: 400 });
+    }
+
+    let chat_history = [];
+    let step = 1;
+
+    chat_history.push(
+      { role: "system", content: getSystemPreprompt(step) },
+    )
+
+    const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+      messages: chat_history
+    });
+
+    return Response.json(response);
+  }
 };
