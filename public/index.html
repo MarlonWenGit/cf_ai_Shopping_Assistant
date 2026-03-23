@@ -10,6 +10,43 @@
   <div class="button">
     <button id="startButton">Start</button>
   </div>
+  <p id="userQuestion" class="hidden"></p>
+
+  <div class = "userInputUIs">
+    <div id="userButtonInputUI" class = "userButtonInputUI hidden">
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+    </div>
+
+    <div id="userNumericalInputUI" class = "userNumericalInputUI hidden">
+      <input id="numericalInput" type="number"/>
+      <button id="numericalSubmit">Submit</button>
+    </div>
+
+    <div id="userTextInputUI" class = "userTextInputUI hidden">
+      <input id="textInput" type="text"/>
+      <button id="textSubmit">Submit</button>
+    </div>
+  </div>
+
+  <div id="scoresPanel">
+    <div>
+      <label>Listing Completeness</label>
+      <input id="completenessSlider" type="range" min="1" max="10" disabled/>
+      <span id="completenessValue">Unknown</span>
+    </div>
+    <div>
+      <label>Seller Credibility</label>
+      <input id="credibilitySlider" type="range" min="1" max="10" disabled/>
+      <span id="credibilityValue">Unknown</span>
+    </div>
+    <div>
+      <label>Risk of Scam</label>
+      <input id="scamSlider" type="range" min="1" max="10" disabled/>
+      <span id="scamValue">Unknown</span>
+    </div>
+  </div>
+
   <script src="scripts.js"></script>
 </body>
 </html>
