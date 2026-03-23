@@ -1,4 +1,10 @@
 const startButton = document.getElementById("startButton");
+const yesButton = document.getElementById("yesButton");
+const noButton = document.getElementById("noButton");
+const finishQuestioningButton = document.getElementById("finishQuestioningButton");
+
+const sellerQuestionsListContainer = document.getElementById("sellerQuestionsListContainer");
+const sellerQuestionsList = document.getElementById("sellerQuestionsList");
 
 const userQuestionText = document.getElementById("userQuestion");
 
@@ -94,24 +100,64 @@ async function handlePrompt(prompt, promptType) {
   });
 
   const data = await response.json();
-  const generatedText = data.response
+  const generatedText = data.response;
 
   console.log(generatedText);
 
-  chat_history = data.chat_history
-  chat_history.push({ role: "assistant", content: generatedText })
+  chat_history = data.chat_history;
+  chat_history.push({ role: "assistant", content: generatedText });
 
   console.log(chat_history);
 
-  return generatedText
+  return generatedText;
 }
 
 async function handleTextInputEvent(event) {
   if (event.key === "Enter") {
     handleUserSubmit(textInput.value);
-    textInput.value = ""
+    textInput.value = "";
   }
 }
 
+async function handleNumericInputEvent(event) {
+  if (event.key === "Enter") {
+    handleUserSubmit(numericalInput.value);
+    numericalInput.value = "";
+  }
+}
+
+async function handleYesButton() {
+  handleUserSubmit("Yes");
+}
+
+async function handleNoButton() {
+  handleUserSubmit("No");
+}
+
+async function handleNoButton() {
+  handleUserSubmit("No");
+}
+
+async function handleFinishQuestioningButton() {
+  hideInputUI();
+  hide(userQuestionText);
+  hide(finishQuestioningButton)
+  const generatedText = await handlePrompt("", "finish questioning");
+  const questions = generatedText.split("|").map(s => s.trim());
+
+  questions.forEach(question => {
+    const listItem = document.createElement("li");
+    listItem.textContent = question;
+    sellerQuestionsList.appendChild(listItem);
+  });
+
+  show(sellerQuestionsListContainer);
+}
+
 startButton.addEventListener("click", handleStartButton);
+yesButton.addEventListener("click", handleYesButton);
+noButton.addEventListener("click", handleNoButton);
+finishQuestioningButton.addEventListener("click", handleFinishQuestioningButton);
+
+numericalInput.addEventListener("keydown", handleNumericInputEvent);
 textInput.addEventListener("keydown", handleTextInputEvent);
