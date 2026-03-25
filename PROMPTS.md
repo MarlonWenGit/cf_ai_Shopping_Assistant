@@ -75,10 +75,48 @@ Proof (receipts, warranty)
 
 10. Wouldn't it make more sense to do the frontend first so I can easily test the backend?
 
-11. Hold on I want to build it myself step-by-step. Please can you refrain from providing me code unless specified.
+11. I want to build it myself step-by-step. Please can you refrain from providing me code unless specified.
 
 12. The CSS styling should be saved for last. I want to work on the HTML webpage first. Can you provide me an empty HTML webpage template, since I don't remember how to structure the preamble at the top of my head.
 
 13. It will all be on one dynamic webpage. The first thing that will be displayed is a start button. Once the user clicks the start button, I want the AI to generate a question, which will be displayed on the page. There will be either a yes/no, numerical, or text input depending on the input type. To begin with, I want to implement the start button, which when clicked on will change what the webpage displays to just the AI generated question. It will be plain text no css styling yet. I will not implement the user input boxes at this stage. To remind you, I currently have: an index.html file with just a start button (no logic yet). index.js file with my backend AI logic. It has a hardcoded chat_history and step variable, which I will keep this way for now. I am seeing what question the AI first generates. Can you first help me implement the hiding logic once the button is clicked.
     
 14. To do the opposite and to show a hidden object, do I just give the hidden objects the .hidden class I created, and then remove from the class list in the scripting?
+
+15. This is the development plan of the webpage, lets work on step 2 now.
+1. Simple webpage with a start button that hides itself when clicked.
+2. The webpage will then display the first AI generated question.
+3. The webpage allows the user to respond to the AI generated question using either a:
+    .Yes/no button
+    .Numeric input
+    .Text input
+4. The webpage displays a live score of the Listing Completeness, Seller Credibility, Risk of Scam metric. It will be a sliding scale and the actual number (or unknown) will also be displayed next to the scale.
+5. When the user responds to the question, the live scores are updated and the next question will be displayed.
+6. There will be a finish questioning button.
+7. Clicking on it hides everything currently on the webpage and displays a list of the AI generated questions to ask the seller.
+
+16. When the user clicks the start button, it hides itself which I have already implemented.  Should I then send a POST request directly to index.js, and only then use scripts.js to show the AI generated question?
+
+17. Great I now have the generated user question and the input type. I will only focus on displaying the user question now. How do I pass a string from scripts.js to my HTML file, then display it.
+
+18. It worked and I now have the AI generated user question displayed: What marketplace or other site is this listing at? Now let's work on step 3: 3. The webpage allows the user to respond to the AI generated question using either a: .Yes/no button .Numeric input .Text input
+
+19. Can you give me the HTML for the 3 inputs.
+
+21. In the current design, the user needs to type the answer in, then click submit. It would be much faster if the user could press enter to submit the form. How would you implement that?
+
+22. Perfect, now lets move onto the next step in the development plan: 5. The webpage displays a live score of the Listing Completeness, Seller Credibility, Risk of Scam metric. It will be a sliding scale and the actual number (or unknown) will also be displayed next to the scale.
+
+23. I will work on the styling later. For now, even just a number displayed is fine, but I'll still use the simplest slider available.
+
+24. In my current design, if the user puts the special prompts like "start" they could trigger a different step of the AI than supposed to, ive decided to add a promptType variable, but how do I pass it to my index.js file.
+
+25. Can you help me debug, the AI seems to think its the one answering the question? It seems like we got a bit off track. You initially asked about a marketplace or site, but it looks like we didn't quite get an answer. Could you please provide more context or information about what you're looking for? I'd be happy to try and help you find the answer.
+
+26. The chat history isnt being updated correctly. I updated it in my index.js, but that doesnt seem to update the list inside scripts.js.
+
+27. I have handled logic for the 3 input types. The AI generated questions are a bit dumb but I will refine the preprompts later. Now let us move onto the final step, which should be pretty easy. 7. There will be a finish questioning button. Clicking on it hides everything currently on the webpage and displays a list of the AI generated questions to ask the seller.
+
+28. I have a questions array of all the generated questions, how do I create a list in HTML and pass on the array.
+
+29. 
