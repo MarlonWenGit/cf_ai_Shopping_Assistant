@@ -119,4 +119,63 @@ Proof (receipts, warranty)
 
 28. I have a questions array of all the generated questions, how do I create a list in HTML and pass on the array.
 
-29. 
+29. All the steps have been completed. Now I'll discuss the next set of steps in the new plan.
+    1. Design the frontend
+    2. Add more metrics for the listing judgement
+    3. Make the AI 'smarter' by refining the preprompt. My current plan to make the AI ask better questions is to go through the questions it generates, rating them on a scale 1-10 and discussing why they are good/bad.
+   
+30. Let's first plan out the general design of each of the three 'states' of the webpage (start questioning, currently questioning, questioning has ended). Let's start with the currently empty webpage with just a start button. Obviously there needs to be more. I'll just take inspiration from the actual Akinator website design. They have a plain but not too plain background with an image of a genie and the logo. The genie says (shown in speech boxes) 'Hello I am Akinator', 'Think about a real or fictional character.I will try to guess who it is'. Let's first brainstorm what our genie should say.
+
+31. I don't have a description, so what the genie says needs to tell the user everything about the app. I want a couple of things mentioned: 1. The AI will generate questions at the end. 2. There is a live system for updating the various metrics after each question. 3. Most important. The genie asks the user questions.
+
+32. I might update the metrics, just mention the metrics in general. The first bubble could be a little more interesting, and the second bubble can tell the user what the app is.
+
+33. I'd rather the genie have an arrogant tone like in the actual Akinator game.
+
+34. Option 4 is perfect: I have never met a listing I could not see through. Can you come up with the second speech bubble.
+
+35. Yes option 3 is perfect: I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding.
+
+36. Yes option 3 is perfect. Speech bubble 1: I have never met a listing I could not see through. Speech bubble 2: I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding. Do you think it's a better idea for me to add it as text on HTML or have the AI generate the image with the text? Will the text in the AI generated image be too blurry.
+
+37. Can you write the HTML for the 2 speech bubbles with the text inside them. Is there a HTML object that allows you to have a text in a container or do you need two seperate objects.
+
+38. Can you refine an image prompt. I want a background which should be magical and with the main colour as blue. I want a genie directly in the middle and a logo beneath it reading Shoppinator
+
+39. How do you resize an image to fit the screen
+
+40. How do you make it go 'underneath' everything else, and what positioning takes it out of interfering with other objects
+
+41. The image aspect ratio means it is wider than typical, and the top and bottom of the image is cut off. Here are the dimensions: 2816 x 1536. I want to add a banner to fill the space underneath. How do you resize the image to fit height wise rather than width wise, and how big should the banner be
+
+42. That doesn't work, can you use the resize property to make it resize 100 percent height wise
+
+43. Can you create the template classes, ill fill in the exact positioning and sizes of the buttons and speech bubbles myself: 
+
+  <div id="startState">
+    <div class="button">
+      <button id="startButton">Start</button>
+    </div>
+
+    <div class="speechBubble">
+      I have never met a listing I could not see through.
+    </div>
+
+    <div class="speechBubble">
+      I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding.
+    </div>
+
+    <img src="Shoppinator background.png" id="genieImage" alt="Shoppinator Genie"/>
+  </div>
+
+44. I've positioned and resized the button now, how do I create a speech bubble in CSS.
+
+45. What's a nice font that fits with the cartoon like aesthetic
+
+46. I dont like that font its all capital letters for some reason.
+
+47. My website has this empty space on the left and right. Is there a way to add that blurred outer edge thing that many websites have
+    
+48. How do i use live server with dynamic webpages
+
+49. I'll just copy my html file and make it static by hardcoding some values. Will that work?
