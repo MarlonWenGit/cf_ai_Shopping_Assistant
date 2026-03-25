@@ -179,3 +179,5 @@ Proof (receipts, warranty)
 48. How do i use live server with dynamic webpages
 
 49. I'll just copy my html file and make it static by hardcoding some values. Will that work?
+
+50. I've decided to change my plans slightly. There's not enough space to stack everything vertically, so I'll have the instruction box on the left (i made a leftContainer class for it) and 3 items on the right (rightContainer class): question + input box, scores panel, finish questioning button. Can you update the css and add the new classes.
