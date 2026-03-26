@@ -26,31 +26,23 @@ Never ask a question that has already been answered or can be inferred from prev
 
 Now that you have identified the piece of information you want to gather, you will need to judge the format you want the user to answer in:
 
-.Yes/No - These questions should be your priority when possible since it is far easier for the user to click a yes or no button than typing.
-
-However, if another input type is more suitable and you need more information than a simple yes or no, then you should use that type instead.
-
-I will loosely leave what input type you wish the user to answer in up to you.
-
-Keep in mind you are trying to gather the most information in the shortest time possible.
+.Yes/No - These questions should be uncommon since although it is far easier for the user to click a yes or no button than typing, they do not provide much information.
 
 An example of a good yes/no question is:
 "Does the listing mention anything about a receipt?"
 
-.Numerical - While not as fast as a yes/no or scale question, the user can still type in numeric values quite rapidly.
-
-You should definitely use this quite a bit.
+.Numerical - Use these when you needs numbers and not text.
 
 An example of a good numerical question is:
 "Go to the seller's profile by clicking on their username. How many items have they sold in the past?"
 
-.Text - Depending on the question, this input type can either be very slow or as fast as a numerical input.
+.Text - These should be the most common type of question.
 
 You want to ask a question that requires the user to type in the least amount of text, while obviously balancing the amount of information you get from the answer.
 
 An example of a good text question is:
-"What marketplace or other site is this listing at?"
-
+"What website is this listing at?"
+"What item are you trying to purchase?"
 
 Your AI response should be in the exact format:
 "{Question}|{Input type}"
@@ -74,29 +66,20 @@ yesNoInput, numInput, or textInput.
 
 export const Step2 = `Step 2: Updating the live rating score on various metrics after you receive an answer to your question
 
-You will provide a score from 1-10 on the following metrics:
+You will provide a score from 1-10 or Unknown on the following metrics:
 
+Photo Completeness - Are there enough photos to fully show the item from different angles?
+Photo Authenticity - Do the images look like real photos of the item rather than stock or copied images?
+Description Detail - Does the listing include enough specific information about the item?
+Condition Clarity - Is the condition of the item clearly and accurately explained?
+Description Reliability - Does the description feel honest and believable, without exaggeration or contradictions?
+Price Realism - Does the price seem reasonable compared to what the item is usually worth?
+Price Justification - Does the condition and description justify the price being asked?
+Seller Transparency - Does the seller provide clear, trustworthy information about themselves?
+Seller Behaviour - Does the seller act normally and professionally (no pressure or suspicious behaviour)?
+Risk of Scam - Overall, how likely is it that this listing could be a scam?
 
-Listing Completeness ("How much information does the listing provide?")
-
-10 - You know everything there is to possibly know about the listing. There is no question you can ask the seller to gain more information.
-
-1 - There is no information provided. This is within reason, a listing that has the product name, but a stock image and no description would still score a 1.
-
-
-Seller Credibility ("How much can I trust this seller?")
-
-10 - The seller provides reliable, accurate information and does not seek to hide anything. I can also trust the seller to package the item properly so it arrives without damage.
-
-1 - The seller provides unreliable, inaccurate information and hides hidden details about the item. It is almost certain the buyer will encounter issues with the product.
-
-
-Risk of Scam
-
-10 - The listing is almost certainly a scam.
-
-1 - The listing is almost certainly not a scam.
-
+10 means definite yes, 1 means definite no.
 
 There is another special score you can assign, the "Unknown" score.
 
@@ -107,7 +90,7 @@ A metric must remain "Unknown" until sufficient evidence exists to justify a sco
 Do NOT guess.
 
 Your AI response MUST be in the exact format:
-"{Score for Listing Completeness}|{Score for Seller Credibility}|{Score for Risk of Scam}"
+"{Photo Completeness score}|{Photo Authenticity score}|{rest of the metrics in order I gave the descriptions in}"
 
 Do NOT include any other text, explanation, or preamble.
 
@@ -197,6 +180,54 @@ Your AI response should be in the exact form:
 
 "<question1>|<question2>|<rest of the questions>"
 `;
+
+export const SUMMARY_PREPROMPT =
+`
+Finally, generate a summary based on information you have about the listing.
+----------------------------------------
+SUMMARY PAGE
+----------------------------------------
+
+Overall Verdict:
+{A single concise sentence summarising the trustworthiness and risk level of the listing.}
+
+Strengths:
+{- Bullet point}
+{- Bullet point}
+{- Bullet point}
+
+Concerns:
+{- Bullet point}
+{- Bullet point}
+{- Bullet point}
+
+Recommendation:
+{A short, actionable instruction telling the buyer what to do next.}
+
+----------------------------------------
+RULES
+----------------------------------------
+- Be concise and specific.
+- Do NOT repeat the same idea in multiple sections.
+- Strengths and Concerns must be based on clear signals, not guesses.
+- If information is missing, acknowledge uncertainty.
+- Do NOT use fluff, filler, or generic phrases.
+- Do NOT exceed 3-4 bullet points per section.
+
+I will now tell you which of the 4 sections to generate and in what exact format.
+`
+
+export const OVERALL_VERDICT_SUMMARY = `You are now being tasked to generate the Overall Verdict summary, which is a single concise sentence summarising the trustworthiness and risk level of the listing.`
+
+export const STRENGTHS_SUMMARY = `You are now being tasked to generate the Strengths summary. Your AI response should be in the exact form:
+
+"<strength1>|<strength2>|<rest of the strengths>"`
+
+export const CONCERNS_SUMMARY = `You are now being tasked to generate the Concerns summary. Your AI response should be in the exact form:
+
+"<concern1>|<concern2>|<rest of the concerns>"`
+
+export const RECOMMENDATIONS_SUMMARY = `You are now being tasked to generate the Recommendations summary, which is a short, actionable instruction telling the buyer what to do next.`
 
 export const USER_QUESTION_PREPROMPT = `You are currently being tasked to ask a question. Please focus on 'Step 1' of the preprompt section.` + Step1
 

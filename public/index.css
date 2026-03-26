@@ -1,7 +1,660 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+p {
+    font-family: 'Crimson Text', serif;
+    color: var(--text-dim);
+    line-height: 1.7;
+    gap: 0.5rem;
+}
+
 .hidden {
-    display: none;
+    display: none !important; /* Ensures it overrides flex or fixed layouts */
+    visibility: hidden !important; /* Extra safeguard */
+    pointer-events: none !important; /* Prevent accidental clicks while hidden */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Philosopher', serif;
+  font-size: clamp(0.5rem, 3cqw, 2.7rem);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.9) 0%,      
+        #0a1931 15%,                
+        #0a1931 85%,                
+        rgba(0, 0, 0, 0.9) 100%     
+    );
+    z-index: -2;
 }
 
 .button {
     position: static;
+}
+
+#startState {
+    position: relative;
+    height: 100vh;
+    width: calc(100vh * 1.833);
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+#genieImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: auto;
+  z-index: 0;
+}
+
+.speechBubble {
+    position: relative;
+    background-color: white;
+    border-radius: 1%;
+    padding: 1.5%;
+    max-width: 20%;
+    z-index: 2;
+    font-size: clamp(0.5rem, 3cqw, 2.7rem);
+    display: flex;
+    align-items: center;
+}
+
+.triangle {
+    position: absolute;
+    bottom: -10%;
+    left: 10%;
+    width: 15%;
+    aspect-ratio: 1;
+    background: white;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: -1;
+}
+
+#speech1 {
+    left: 25%;
+    top: 13%;
+    opacity: 90%;
+    width: 15.15%;
+    height: 1.8%;
+}
+
+#speech1 .triangle {
+    left: 85%;
+}
+
+#speech2 {
+    left: 56.5%;
+    top: 8%;
+    opacity: 90%;
+    width: 20.1%;
+    height: 9%;
+}
+
+#speech2 .triangle {
+    left: 0%;
+}
+
+
+#startButton {
+    position: absolute;
+    z-index: 1;
+    left: 38.8%;
+    top: 82.8%;
+    width: 20.1%;
+    height: 11.2%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e8cc7a;
+    --navy: #0a0e1a;
+    --navy-mid: #111827;
+    --navy-light: #1a2340;
+    --text: #e8dfc8;
+    --text-dim: #9a8f7a;
+    --border: rgba(201, 168, 76, 0.3);
+}
+
+#questioningState {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    gap: 2%;
+}
+
+.leftContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+    overflow-y: auto; 
+    padding-right: 10px; 
+}
+
+.leftContainer {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent; 
+}
+
+.leftContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leftContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.leftContainer::-webkit-scrollbar-thumb {
+    background-color: var(--gold);
+    border-radius: 10px;
+}
+
+.leftContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gold-light);
+}
+
+.rightContainer {
+    flex: 1.9;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    min-height: 0;
+}
+
+#instructions {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: auto 0;
+}
+
+#instructionsTitle {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+#instructionsBody {
+    font-family: 'Crimson Text', serif;
+    color: var(--text-dim);
+    line-height: 1.7;
+    font-size: clamp(0.5rem, 3cqw, 3rem);
+}
+
+#instructionsBody em {
+    color: var(--gold-light);
+    font-style: italic;
+}
+
+#questionInputContainer {
+    width: 100%;
+    min-height: 40%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+#questionInputContainer:empty {
+    display: none;
+}
+
+#userQuestion {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    text-align: center;
+    line-height: 1.7;
+    font-style: bold;
+    margin: 0;
+    font-size: clamp(0.5rem, 3cqw, 3.5rem);
+}
+
+.userInputUIs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bordered-container {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.scoresPanel {
+    flex: 1 1 auto;   
+    max-height: 42%;  
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.scoresPanel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+}
+
+.scoresPanel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scoresPanel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scoresPanel::-webkit-scrollbar-thumb {
+    background-color: var(--gold);
+    border-radius: 10px;
+}
+
+.scoresPanel::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gold-light);
+}
+
+.scoresPanel > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.scoresPanel label {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+.scoresPanel span {
+    font-family: 'Cinzel', serif;
+    color: var(--text-dim);
+    font-style: italic;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Firefox */
+#summaryPanel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+}
+
+/* Chrome, Edge, Safari */
+#summaryPanel::-webkit-scrollbar {
+    width: 6px;
+}
+
+#summaryPanel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#summaryPanel::-webkit-scrollbar-thumb {
+    background-color: var(--gold);
+    border-radius: 10px;
+}
+
+#summaryPanel::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gold-light);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: var(--navy-light);
+    border-radius: 2px;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--navy);
+    box-shadow: 0 0 6px rgba(201, 168, 76, 0.5);
+}
+
+#finishQuestioningButton {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    border: none;
+    padding: 0.85rem 2.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    width: 30%;
+    font-size: clamp(0.5rem, 3cqw, 2rem);
+}
+
+#finishQuestioningButton:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(201, 168, 76, 0.4);
+}
+
+.button {
+    width: 100%;
+    flex: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for the buttons */
+#userButtonInputUI {
+    display: flex;
+    gap: 1rem;                /* Space between buttons */
+    justify-content: center;  /* Center them horizontally */
+    margin-top: 1rem;
+}
+
+#userButtonInputUI.hidden {
+    display: none !important;
+}
+
+/* Common styles for both buttons */
+#userButtonInputUI button {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    padding: 2rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    min-width: 60%;
+}
+
+/* Yes button styling */
+#yesButton {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+}
+
+#yesButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+}
+
+/* Yes button styling */
+#noButton {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+}
+
+#noButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+}
+
+/* Hide by default */
+#userNumericalInputUI.hidden {
+    display: none !important;
+}
+
+/* Container for numerical input + label */
+#userNumericalInputUI {
+    display: flex;
+    align-items: center;       /* Vertically align text and input */
+    gap: 0.75rem;              /* Space between the text and the input */
+    margin-top: 1rem;
+}
+
+/* Instruction text */
+#numericalInputInstructions {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    color: var(--gold-light);
+    white-space: nowrap;       /* Keep text on a single line */
+}
+
+/* Style for the number input field */
+#numericalInput {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    color: var(--text);
+    width: 30rem;               /* Adjust width as needed */
+    text-align: center;
+}
+
+/* Container for text input, reusing the numerical input styling */
+#userTextInputUI {
+    display: flex;
+    align-items: center;       /* Align input vertically */
+    gap: 0.75rem;              /* Space between label (if added) and input */
+    margin-top: 1rem;
+}
+
+/* Hide by default */
+#userTextInputUI.hidden {
+    display: none !important;
+}
+
+/* Instruction text */
+#textInputInstructions {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    color: var(--gold-light);
+    white-space: nowrap;       /* Keep text on a single line */
+}
+
+/* Text input field */
+#textInput {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--text);
+    width: 30rem;              /* Wider than number input for text */
+    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+}
+
+/* Container for the end questioning state */
+#endQuestioningState {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    gap: 2%;
+    background: #0a1931; /* dark blue background to match theme */
+}
+
+/* Left half: Questions list */
+#sellerQuestionsListContainer {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    background: rgba(201, 168, 76, 0.04); /* subtle gold-tinted background */
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    overflow-y: auto; /* scroll if content exceeds height */
+}
+
+/* Scrollbar styling for left container */
+#sellerQuestionsListContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+#sellerQuestionsListContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#sellerQuestionsListContainer::-webkit-scrollbar-thumb {
+    background-color: var(--gold);
+    border-radius: 10px;
+}
+
+#sellerQuestionsListContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gold-light);
+}
+
+/* Title styling */
+#sellerQuestionsTitle {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 1rem 0;
+}
+
+/* Questions list styling */
+#sellerQuestionsList {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    font-family: 'Crimson Text', serif;
+    color: var(--text-dim);
+    line-height: 1.7;
+    gap: 0.5rem;
+}
+
+#sellerQuestionsList li {
+    margin-bottom: 0.75rem;
+}
+
+#summaryPanel {
+    flex: 1; /* fills remaining space under scores panel */
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(201, 168, 76, 0.04);
+    padding: 1.5rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    overflow-y: auto;
+    min-height: 0;
+}
+
+#summaryPanel h2 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0;
+}
+
+#overallVerdict {
+    font-family: 'Crimson Text', serif;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 1.1em;
+}
+
+.summarySection h3 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+}
+
+.summarySection ul {
+    padding-left: 1.2rem;
+    margin: 0;
+    color: var(--text-dim);
+    font-family: 'Crimson Text', serif;
+}
+
+.summarySection li {
+    margin-bottom: 0.4rem;
+}
+
+#tryAgainButton {
+    margin-top: auto; /* pushes it to bottom */
+
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy);
+
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2px;
+    cursor: pointer;
+
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    font-size:clamp(0.5rem, 3cqw, 2.5rem);
+}
+
+#tryAgainButton:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(201, 168, 76, 0.4);
+}
+
+#rightContainer3 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }

@@ -1,4 +1,14 @@
-import { PREPROMPT, USER_QUESTION_PREPROMPT, UPDATE_RATING_PREPROMPT, SELLER_QUESTION_PREPROMPT } from "./preprompts.js";
+import { 
+  PREPROMPT, 
+  USER_QUESTION_PREPROMPT, 
+  UPDATE_RATING_PREPROMPT, 
+  SELLER_QUESTION_PREPROMPT, 
+  SUMMARY_PREPROMPT,
+  OVERALL_VERDICT_SUMMARY,
+  STRENGTHS_SUMMARY,
+  RECOMMENDATIONS_SUMMARY,
+  CONCERNS_SUMMARY
+} from "./preprompts.js";
 
 export default {
   async fetch(request, env) {
@@ -37,7 +47,15 @@ export default {
       body.chat_history.push({ role: "user", content: UPDATE_RATING_PREPROMPT + body.prompt })
     } else if (body.promptType == "finish questioning") {
       body.chat_history.push({ role: "user", content: SELLER_QUESTION_PREPROMPT });
-    }
+    } else if (body.promptType == "get overallVerdictSummary") {
+      body.chat_history.push({ role: "user", content: SUMMARY_PREPROMPT + OVERALL_VERDICT_SUMMARY });
+    } else if (body.promptType == "get strengthsSummary") {
+      body.chat_history.push({ role: "user", content: SUMMARY_PREPROMPT + STRENGTHS_SUMMARY });
+    } else if (body.promptType == "get concernsSummary") {
+      body.chat_history.push({ role: "user", content: SUMMARY_PREPROMPT + CONCERNS_SUMMARY });
+    } else if (body.promptType == "get recommendationSummary") {
+      body.chat_history.push({ role: "user", content: SUMMARY_PREPROMPT + RECOMMENDATIONS_SUMMARY });
+    } 
 
     const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
       messages: body.chat_history,

@@ -5,56 +5,258 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Akinator Shopping Assistant</title>
   <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <div class="button">
-    <button id="startButton">Start</button>
-  </div>
-  <p id="userQuestion" class="hidden"></p>
-
-  <div class = "userInputUIs">
-    <div id="userButtonInputUI" class = "userButtonInputUI hidden">
-      <button id="yesButton">Yes</button>
-      <button id="noButton">No</button>
+  <div id="startState">
+    <div class="button">
+      <button id="startButton"></button>
     </div>
 
-    <div id="userNumericalInputUI" class = "userNumericalInputUI hidden">
-      <input id="numericalInput" type="number"/>
-      <button id="numericalSubmit">Submit</button>
+    <div id="speech1" class="speechBubble">
+      Hello, I am Shoppinator!
+      <div class="triangle"></div>
     </div>
 
-    <div id="userTextInputUI" class = "userTextInputUI hidden">
-      <input id="textInput" type="text"/>
-      <button id="textSubmit">Submit</button>
+    <div id="speech2" class="speechBubble">
+      Bring me a listing. I'll tell you if it's worth your coin and what to ask the seller.
+      <div class="triangle"></div>
     </div>
+
+    <img src="Shoppinator background.png" id="genieImage" alt="Shoppinator Genie"/>
   </div>
 
-  <div id="scoresPanel">
-    <div>
-      <label>Listing Completeness</label>
-      <input id="completenessSlider" type="range" min="1" max="10" disabled/>
-      <span id="completenessValue">Unknown</span>
+  <div id="questioningState" class="hidden">
+    <div class = "leftContainer">
+      <div id="instructions">
+        <p id="instructionsTitle">Your Audience Has Been Granted</p>
+
+        <p id="instructionsBody">
+          Present a listing, and I will begin the interrogation. Answer each question truthfully.
+        </p>
+
+        <p id="instructionsBody">
+          With every response, the scores panel updates — evaluating the listing across multiple measures from 1 to 10. Values begin as <em>Unknown</em> until sufficient evidence is gathered.
+        </p>
+
+        <p id="instructionsBody">
+          When you have endured enough, press <em>Finish Questioning</em>. I will then provide questions capable of exposing the truth behind any seller.
+        </p>
+
+        <p id="instructionsBody"><strong>Metric Guide:</strong></p>
+
+        <ul id="instructionsBody">
+          <li><strong>Photo Completeness</strong> - Are there enough photos to show the item from multiple angles?</li>
+          <li><strong>Photo Authenticity</strong> - Do the images appear to be real photos of the item, not stock or copied?</li>
+          <li><strong>Condition Clarity</strong> - Is the item's condition clearly and accurately shown?</li>
+          <li><strong>Description Detail</strong> - Does the listing include sufficient specific information?</li>
+          <li><strong>Description Reliability</strong> - Does the description feel honest and free from contradictions?</li>
+          <li><strong>Price Realism</strong> - Is the price reasonable for this type of item?</li>
+          <li><strong>Price Justification</strong> - Does the condition and description support the price?</li>
+          <li><strong>Seller Transparency</strong> - Does the seller provide clear and trustworthy information about themselves?</li>
+          <li><strong>Seller Behaviour</strong> - Does the seller act normally and without pressure or suspicious behaviour?</li>
+          <li><strong>Risk of Scam</strong> - Overall likelihood that the listing is a scam</li>
+        </ul>
+
+        <p id="instructionsBody"><strong>Scoring:</strong></p>
+
+        <ul id="instructionsBody">
+          <li><strong>10</strong> = Strong positive signal</li>
+          <li><strong>1</strong> = Strong negative signal</li>
+          <li><em>Unknown</em> = Not enough information yet</li>
+          <li>A score will only be assigned when there is clear evidence.</li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <label>Seller Credibility</label>
-      <input id="credibilitySlider" type="range" min="1" max="10" disabled/>
-      <span id="credibilityValue">Unknown</span>
-    </div>
-    <div>
-      <label>Risk of Scam</label>
-      <input id="scamSlider" type="range" min="1" max="10" disabled/>
-      <span id="scamValue">Unknown</span>
+
+    <div class = "rightContainer">
+      <div id="questionInputContainer"> <p id="userQuestion"></p>
+        <div class="userInputUIs">
+          <div id="userButtonInputUI" class="userButtonInputUI hidden">
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
+          </div>
+
+          <div id="userNumericalInputUI" class="userNumericalInputUI hidden">
+            <p id="numericalInputInstructions">Enter your answer (numerical):</p>
+            <input id="numericalInput" type="number"/>
+          </div>
+
+          <div id="userTextInputUI" class="userTextInputUI hidden">
+            <p id="textInputInstructions">Enter your answer:</p>
+            <input id="textInput" type="text"/>
+          </div>
+        </div>
+      </div>
+
+      <div id="startScoresPanel" class="scoresPanel">
+
+        <div>
+          <label>Photo Completeness</label>
+          <input id="photoCompletenessSlider" type="range" min="1" max="10" disabled/>
+          <span id="photoCompletenessValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Photo Authenticity</label>
+          <input id="photoAuthenticitySlider" type="range" min="1" max="10" disabled/>
+          <span id="photoAuthenticityValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Description Detail</label>
+          <input id="descriptionDetailSlider" type="range" min="1" max="10" disabled/>
+          <span id="descriptionDetailValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Condition Clarity</label>
+          <input id="conditionClaritySlider" type="range" min="1" max="10" disabled/>
+          <span id="conditionClarityValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Description Reliability</label>
+          <input id="descriptionReliabilitySlider" type="range" min="1" max="10" disabled/>
+          <span id="descriptionReliabilityValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Price Realism</label>
+          <input id="priceRealismSlider" type="range" min="1" max="10" disabled/>
+          <span id="priceRealismValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Price Justification</label>
+          <input id="priceJustificationSlider" type="range" min="1" max="10" disabled/>
+          <span id="priceJustificationValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Seller Transparency</label>
+          <input id="sellerTransparencySlider" type="range" min="1" max="10" disabled/>
+          <span id="sellerTransparencyValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Seller Behaviour</label>
+          <input id="sellerBehaviourSlider" type="range" min="1" max="10" disabled/>
+          <span id="sellerBehaviourValue">Unknown</span>
+        </div>
+
+        <div>
+          <label>Risk of Scam</label>
+          <input id="scamRiskSlider" type="range" min="1" max="10" disabled/>
+          <span id="scamRiskValue">Unknown</span>
+        </div>
+
+      </div>
+
+      <div class="button">
+        <button id="finishQuestioningButton">Finish questioning</button>
+      </div>
     </div>
   </div>
 
-  <div class="button">
-    <button id="finishQuestioningButton">Finish questioning</button>
-  </div>
+  <div id="endQuestioningState" class="hidden">
+    <div class="leftContainer">
+      <div id="sellerQuestionsListContainer">
+        <h2 id="sellerQuestionsTitle">Suggested Questions for the Seller</h2>
+        <ul id="sellerQuestionsList"></ul>
+      </div>
+    </div>
 
-  <div id="sellerQuestionsListContainer" class="hidden">
-    <ul id="sellerQuestionsList"></ul>
-  </div>
+    <div id="rightContainer3" class = "rightContainer">
+      <div id="endScoresPanel" class="scoresPanel">
+        <div>
+          <label>Photo Completeness</label>
+          <input id="photoCompletenessSlider" type="range" min="1" max="10" disabled/>
+          <span id="photoCompletenessValue"></span>
+        </div>
 
+        <div>
+          <label>Photo Authenticity</label>
+          <input id="photoAuthenticitySlider" type="range" min="1" max="10" disabled/>
+          <span id="photoAuthenticityValue"></span>
+        </div>
+
+        <div>
+          <label>Description Detail</label>
+          <input id="descriptionDetailSlider" type="range" min="1" max="10" disabled/>
+          <span id="descriptionDetailValue"></span>
+        </div>
+
+        <div>
+          <label>Condition Clarity</label>
+          <input id="conditionClaritySlider" type="range" min="1" max="10" disabled/>
+          <span id="conditionClarityValue"></span>
+        </div>
+
+        <div>
+          <label>Description Reliability</label>
+          <input id="descriptionReliabilitySlider" type="range" min="1" max="10" disabled/>
+          <span id="descriptionReliabilityValue"></span>
+        </div>
+
+        <div>
+          <label>Price Realism</label>
+          <input id="priceRealismSlider" type="range" min="1" max="10" disabled/>
+          <span id="priceRealismValue"></span>
+        </div>
+
+        <div>
+          <label>Price Justification</label>
+          <input id="priceJustificationSlider" type="range" min="1" max="10" disabled/>
+          <span id="priceJustificationValue"></span>
+        </div>
+
+        <div>
+          <label>Seller Transparency</label>
+          <input id="sellerTransparencySlider" type="range" min="1" max="10" disabled/>
+          <span id="sellerTransparencyValue"></span>
+        </div>
+
+        <div>
+          <label>Seller Behaviour</label>
+          <input id="sellerBehaviourSlider" type="range" min="1" max="10" disabled/>
+          <span id="sellerBehaviourValue"></span>
+        </div>
+
+        <div>
+          <label>Risk of Scam</label>
+          <input id="scamRiskSlider" type="range" min="1" max="10" disabled/>
+          <span id="scamRiskValue"></span>
+        </div>
+      </div>
+
+      <div id="summaryPanel">
+        <h2>Final Verdict</h2>
+
+        <p id="overallVerdictSummary"></p>
+
+        <div class="summarySection">
+          <h3>Strengths</h3>
+          <ul id="strengthsSummary"></ul>
+        </div>
+
+        <div class="summarySection">
+          <h3>Concerns</h3>
+          <ul id="concernsSummary">
+          </ul>
+        </div>
+
+        <div class="summarySection">
+          <h3>Recommendation</h3>
+          <p id="recommendationSummary"></p>
+        </div>
+
+        <div class="button">
+          <button id="tryAgainButton">Go Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="scripts.js"></script>
 </body>
 </html>

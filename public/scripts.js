@@ -17,20 +17,44 @@ const usertextInputUI = document.getElementById("userTextInputUI");
 const numericalInput = document.getElementById("numericalInput");
 const textInput = document.getElementById("textInput");
 
+// 3 states
+const startState = document.getElementById("startState");
+const questioningState = document.getElementById("questioningState");
+const endQuestioningState = document.getElementById("endQuestioningState");
+
+const loadingText = "Thinking...";
+const loadingPlaceholder = document.createElement("li");
+loadingPlaceholder.textContent = loadingText;
+
 let chat_history = [];
-let step = 1;
 
-let completenessValue = document.getElementById("completenessValue");
-let credibilityValue = document.getElementById("credibilityValue");
-let scamValue = document.getElementById("scamValue");
+let photoCompletenessValue = document.getElementById("photoCompletenessValue");
+let photoAuthenticityValue = document.getElementById("photoAuthenticityValue");
+let descriptionDetailValue = document.getElementById("descriptionDetailValue");
+let conditionClarityValue = document.getElementById("conditionClarityValue");
+let descriptionReliabilityValue = document.getElementById("descriptionReliabilityValue");
+let priceRealismValue = document.getElementById("priceRealismValue");
+let priceJustificationValue = document.getElementById("priceJustificationValue");
+let sellerTransparencyValue = document.getElementById("sellerTransparencyValue");
+let sellerBehaviourValue = document.getElementById("sellerBehaviourValue");
+let scamRiskValue = document.getElementById("scamRiskValue");
+const metrics = [
+  photoCompletenessValue,
+  photoAuthenticityValue,
+  descriptionDetailValue,
+  conditionClarityValue,
+  descriptionReliabilityValue,
+  priceRealismValue,
+  priceJustificationValue,
+  sellerTransparencyValue,
+  sellerBehaviourValue,
+  scamRiskValue
+];
 
-function updateStep() {
-  if (step == 1) {
-    step = 2;
-  } else if (step == 2) {
-    step = 1;
-  }
-}
+let overallVerdictSummary = document.getElementById("overallVerdictSummary");
+let strengthsSummary = document.getElementById("strengthsSummary");
+let concernsSummary = document.getElementById("concernsSummary");
+let recommendationSummary = document.getElementById("recommendationSummary");
 
 function hide(object) {
   object.classList.add("hidden");
@@ -47,7 +71,11 @@ function hideInputUI() {
 }
 
 async function handleStartButton() {
-  hide(startButton);
+  hide(startState);
+
+  show(questioningState)
+  changeToLoadingText(userQuestionText);
+  show(userQuestionText);
 
   const generatedText = await handlePrompt("", "start");
   displayNextUserQuestion(generatedText)
@@ -60,24 +88,31 @@ function displayNextUserQuestion(generatedText) {
 }
 
 function updateScoresUI(generatedText) {
-  const [listingCompleteness, sellerCredibility, riskOfScam] = generatedText.split("|").map(s => s.trim());
-  completenessValue.textContent = listingCompleteness;
-  credibilityValue.textContent = sellerCredibility;
-  scamValue.textContent = riskOfScam;
+  const metricScores = generatedText.split("|").map(s => s.trim());
+
+  for (i=0; i<metrics.length; i++) {
+    metrics[i].textContent = metricScores[i]
+  }
+}
+
+function changeToLoadingText(textContainer) {
+  textContainer.textContent = loadingText;
 }
 
 async function handleUserSubmit(userInput) {
   hideInputUI();
+
+  metrics.forEach((metric) => changeToLoadingText(metric))
   let generatedText = await handlePrompt(userInput, "update rating");
   updateScoresUI(generatedText);
 
+  changeToLoadingText(userQuestionText)
   generatedText = await handlePrompt("", "get next user question");
   displayNextUserQuestion(generatedText);
 }
 
 function displayUserQuestionText(generatedUserQuestion) {
   userQuestionText.textContent = generatedUserQuestion;
-  show(userQuestionText);
 }
 
 function displayUserInput(inputType) {
@@ -96,7 +131,7 @@ async function handlePrompt(prompt, promptType) {
   const response = await fetch("http://127.0.0.1:8787/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: prompt, promptType: promptType, step: step, chat_history: chat_history })
+    body: JSON.stringify({ prompt: prompt, promptType: promptType, chat_history: chat_history })
   });
 
   const data = await response.json();
@@ -139,19 +174,44 @@ async function handleNoButton() {
 }
 
 async function handleFinishQuestioningButton() {
-  hideInputUI();
-  hide(userQuestionText);
-  hide(finishQuestioningButton)
-  const generatedText = await handlePrompt("", "finish questioning");
-  const questions = generatedText.split("|").map(s => s.trim());
+  hide(questioningState)
 
-  questions.forEach(question => {
+  sellerQuestionsList.appendChild(loadingPlaceholder)
+  show(endQuestioningState);
+  const generatedText = await handlePrompt("", "finish questioning");
+  sellerQuestionsList.removeChild(loadingPlaceholder)
+  parseGeneratedTextToHTMLList(generatedText, sellerQuestionsList)
+
+  generateSummary()
+}
+
+function parseGeneratedTextToHTMLList(generatedText, HTMLList) {
+  const list = generatedText.split("|").map(s => s.trim());
+  list.forEach(question => {
     const listItem = document.createElement("li");
     listItem.textContent = question;
-    sellerQuestionsList.appendChild(listItem);
+    HTMLList.appendChild(listItem);
   });
+}
 
-  show(sellerQuestionsListContainer);
+async function generateSummary() {
+  changeToLoadingText(overallVerdictSummary)
+  let generatedText = await handlePrompt("", "get overallVerdictSummary");
+  overallVerdictSummary.textContent = generatedText
+
+  strengthsSummary.appendChild(loadingPlaceholder)
+  generatedText = await handlePrompt("", "get strengthsSummary")
+  strengthsSummary.removeChild(loadingPlaceholder);
+  parseGeneratedTextToHTMLList(generatedText, strengthsSummary)
+
+  concernsSummary.appendChild(loadingPlaceholder)
+  generatedText = await handlePrompt("", "get concernsSummary");
+  concernsSummary.removeChild(loadingPlaceholder)
+  parseGeneratedTextToHTMLList(generatedText, concernsSummary)
+
+  changeToLoadingText(recommendationSummary)
+  generatedText = await handlePrompt("", "get recommendationSummary");
+  recommendationSummary.textContent = generatedText
 }
 
 startButton.addEventListener("click", handleStartButton);
