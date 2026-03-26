@@ -19,7 +19,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Philosopher', serif;
-  font-size: clamp(0.5rem, 3cqw, 2.7rem);
+  font-size: clamp(0.5rem, 3vw, 2.7rem);
 }
 
 body::before {
@@ -65,7 +65,7 @@ body::before {
     padding: 1.5%;
     max-width: 20%;
     z-index: 2;
-    font-size: clamp(0.5rem, 3cqw, 2.7rem);
+    font-size: clamp(0.5rem, 3vw, 2.7rem);
     display: flex;
     align-items: center;
 }
@@ -204,7 +204,7 @@ body::before {
     font-family: 'Crimson Text', serif;
     color: var(--text-dim);
     line-height: 1.7;
-    font-size: clamp(0.5rem, 3cqw, 3rem);
+    font-size: clamp(0.5rem, 3vw, 3rem);
 }
 
 #instructionsBody em {
@@ -237,7 +237,7 @@ body::before {
     line-height: 1.7;
     font-style: bold;
     margin: 0;
-    font-size: clamp(0.5rem, 3cqw, 3.5rem);
+    font-size: clamp(0.5rem, 3vw, 3.5rem);
 }
 
 .userInputUIs {
@@ -375,7 +375,7 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
     width: 30%;
-    font-size: clamp(0.5rem, 3cqw, 2rem);
+    font-size: clamp(0.5rem, 3vw, 2rem);
 }
 
 #finishQuestioningButton:hover {
@@ -414,7 +414,7 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 2rem 2rem;
     border-radius: 4px;
     cursor: pointer;
-    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
     transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     min-width: 60%;
@@ -460,7 +460,7 @@ input[type="range"]::-webkit-slider-thumb {
 /* Instruction text */
 #numericalInputInstructions {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--gold-light);
     white-space: nowrap;       /* Keep text on a single line */
 }
@@ -472,7 +472,7 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--text);
     width: 30rem;               /* Adjust width as needed */
     text-align: center;
@@ -494,7 +494,7 @@ input[type="range"]::-webkit-slider-thumb {
 /* Instruction text */
 #textInputInstructions {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--gold-light);
     white-space: nowrap;       /* Keep text on a single line */
 }
@@ -509,7 +509,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 1rem;
     color: var(--text);
     width: 30rem;              /* Wider than number input for text */
-    font-size: clamp(0.5rem, 3cqw, 2.5rem);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
 }
 
 /* Container for the end questioning state */
@@ -644,7 +644,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 700;
     box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-    font-size:clamp(0.5rem, 3cqw, 2.5rem);
+    font-size:clamp(0.5rem, 3vw, 2.5rem);
 }
 
 #tryAgainButton:hover {
