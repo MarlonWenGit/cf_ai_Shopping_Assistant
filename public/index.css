@@ -68,6 +68,8 @@ body::before {
     font-size: clamp(0.5rem, 3vw, 2.7rem);
     display: flex;
     align-items: center;
+    font-family: 'Crimson Text', serif; /* ensure font is applied */
+    font-size: clamp(0.5rem, 2.5vw, 2.7rem);
 }
 
 .triangle {
