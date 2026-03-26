@@ -26,7 +26,7 @@ Never ask a question that has already been answered or can be inferred from prev
 
 Now that you have identified the piece of information you want to gather, you will need to judge the format you want the user to answer in:
 
-.Yes/No - These questions should be uncommon since although it is far easier for the user to click a yes or no button than typing, they do not provide much information.
+.Yes/No - These questions should be rare since although it is far easier for the user to click a yes or no button than typing, they do not provide much information.
 
 An example of a good yes/no question is:
 "Does the listing mention anything about a receipt?"
@@ -36,7 +36,7 @@ An example of a good yes/no question is:
 An example of a good numerical question is:
 "Go to the seller's profile by clicking on their username. How many items have they sold in the past?"
 
-.Text - These should be the most common type of question.
+.Text - These should be the most common type of question, they provide the most information possible.
 
 You want to ask a question that requires the user to type in the least amount of text, while obviously balancing the amount of information you get from the answer.
 

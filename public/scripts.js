@@ -120,8 +120,10 @@ function displayUserInput(inputType) {
     show(userButtonInputUI);
   } else if (inputType == "numInput") {
     show(userNumericalInputUI);
+    numericalInput.focus()
   } else if (inputType == "textInput") {
     show(usertextInputUI);
+    textInput.focus()
   }
 }
 
