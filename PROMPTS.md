@@ -75,10 +75,109 @@ Proof (receipts, warranty)
 
 10. Wouldn't it make more sense to do the frontend first so I can easily test the backend?
 
-11. Hold on I want to build it myself step-by-step. Please can you refrain from providing me code unless specified.
+11. I want to build it myself step-by-step. Please can you refrain from providing me code unless specified.
 
 12. The CSS styling should be saved for last. I want to work on the HTML webpage first. Can you provide me an empty HTML webpage template, since I don't remember how to structure the preamble at the top of my head.
 
 13. It will all be on one dynamic webpage. The first thing that will be displayed is a start button. Once the user clicks the start button, I want the AI to generate a question, which will be displayed on the page. There will be either a yes/no, numerical, or text input depending on the input type. To begin with, I want to implement the start button, which when clicked on will change what the webpage displays to just the AI generated question. It will be plain text no css styling yet. I will not implement the user input boxes at this stage. To remind you, I currently have: an index.html file with just a start button (no logic yet). index.js file with my backend AI logic. It has a hardcoded chat_history and step variable, which I will keep this way for now. I am seeing what question the AI first generates. Can you first help me implement the hiding logic once the button is clicked.
     
 14. To do the opposite and to show a hidden object, do I just give the hidden objects the .hidden class I created, and then remove from the class list in the scripting?
+
+15. This is the development plan of the webpage, lets work on step 2 now.
+1. Simple webpage with a start button that hides itself when clicked.
+2. The webpage will then display the first AI generated question.
+3. The webpage allows the user to respond to the AI generated question using either a:
+    .Yes/no button
+    .Numeric input
+    .Text input
+4. The webpage displays a live score of the Listing Completeness, Seller Credibility, Risk of Scam metric. It will be a sliding scale and the actual number (or unknown) will also be displayed next to the scale.
+5. When the user responds to the question, the live scores are updated and the next question will be displayed.
+6. There will be a finish questioning button.
+7. Clicking on it hides everything currently on the webpage and displays a list of the AI generated questions to ask the seller.
+
+16. When the user clicks the start button, it hides itself which I have already implemented.  Should I then send a POST request directly to index.js, and only then use scripts.js to show the AI generated question?
+
+17. Great I now have the generated user question and the input type. I will only focus on displaying the user question now. How do I pass a string from scripts.js to my HTML file, then display it.
+
+18. It worked and I now have the AI generated user question displayed: What marketplace or other site is this listing at? Now let's work on step 3: 3. The webpage allows the user to respond to the AI generated question using either a: .Yes/no button .Numeric input .Text input
+
+19. Can you give me the HTML for the 3 inputs.
+
+21. In the current design, the user needs to type the answer in, then click submit. It would be much faster if the user could press enter to submit the form. How would you implement that?
+
+22. Perfect, now lets move onto the next step in the development plan: 5. The webpage displays a live score of the Listing Completeness, Seller Credibility, Risk of Scam metric. It will be a sliding scale and the actual number (or unknown) will also be displayed next to the scale.
+
+23. I will work on the styling later. For now, even just a number displayed is fine, but I'll still use the simplest slider available.
+
+24. In my current design, if the user puts the special prompts like "start" they could trigger a different step of the AI than supposed to, ive decided to add a promptType variable, but how do I pass it to my index.js file.
+
+25. Can you help me debug, the AI seems to think its the one answering the question? It seems like we got a bit off track. You initially asked about a marketplace or site, but it looks like we didn't quite get an answer. Could you please provide more context or information about what you're looking for? I'd be happy to try and help you find the answer.
+
+26. The chat history isnt being updated correctly. I updated it in my index.js, but that doesnt seem to update the list inside scripts.js.
+
+27. I have handled logic for the 3 input types. The AI generated questions are a bit dumb but I will refine the preprompts later. Now let us move onto the final step, which should be pretty easy. 7. There will be a finish questioning button. Clicking on it hides everything currently on the webpage and displays a list of the AI generated questions to ask the seller.
+
+28. I have a questions array of all the generated questions, how do I create a list in HTML and pass on the array.
+
+29. All the steps have been completed. Now I'll discuss the next set of steps in the new plan.
+    1. Design the frontend
+    2. Add more metrics for the listing judgement
+    3. Make the AI 'smarter' by refining the preprompt. My current plan to make the AI ask better questions is to go through the questions it generates, rating them on a scale 1-10 and discussing why they are good/bad.
+   
+30. Let's first plan out the general design of each of the three 'states' of the webpage (start questioning, currently questioning, questioning has ended). Let's start with the currently empty webpage with just a start button. Obviously there needs to be more. I'll just take inspiration from the actual Akinator website design. They have a plain but not too plain background with an image of a genie and the logo. The genie says (shown in speech boxes) 'Hello I am Akinator', 'Think about a real or fictional character.I will try to guess who it is'. Let's first brainstorm what our genie should say.
+
+31. I don't have a description, so what the genie says needs to tell the user everything about the app. I want a couple of things mentioned: 1. The AI will generate questions at the end. 2. There is a live system for updating the various metrics after each question. 3. Most important. The genie asks the user questions.
+
+32. I might update the metrics, just mention the metrics in general. The first bubble could be a little more interesting, and the second bubble can tell the user what the app is.
+
+33. I'd rather the genie have an arrogant tone like in the actual Akinator game.
+
+34. Option 4 is perfect: I have never met a listing I could not see through. Can you come up with the second speech bubble.
+
+35. Yes option 3 is perfect: I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding.
+
+36. Yes option 3 is perfect. Speech bubble 1: I have never met a listing I could not see through. Speech bubble 2: I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding. Do you think it's a better idea for me to add it as text on HTML or have the AI generate the image with the text? Will the text in the AI generated image be too blurry.
+
+37. Can you write the HTML for the 2 speech bubbles with the text inside them. Is there a HTML object that allows you to have a text in a container or do you need two seperate objects.
+
+38. Can you refine an image prompt. I want a background which should be magical and with the main colour as blue. I want a genie directly in the middle and a logo beneath it reading Shoppinator
+
+39. How do you resize an image to fit the screen
+
+40. How do you make it go 'underneath' everything else, and what positioning takes it out of interfering with other objects
+
+41. The image aspect ratio means it is wider than typical, and the top and bottom of the image is cut off. Here are the dimensions: 2816 x 1536. I want to add a banner to fill the space underneath. How do you resize the image to fit height wise rather than width wise, and how big should the banner be
+
+42. That doesn't work, can you use the resize property to make it resize 100 percent height wise
+
+43. Can you create the template classes, ill fill in the exact positioning and sizes of the buttons and speech bubbles myself: 
+
+  <div id="startState">
+    <div class="button">
+      <button id="startButton">Start</button>
+    </div>
+
+    <div class="speechBubble">
+      I have never met a listing I could not see through.
+    </div>
+
+    <div class="speechBubble">
+      I will interrogate the listing through you. My metrics will update with every answer you give. And when I am finished, I will hand you the questions that expose what the seller is hiding.
+    </div>
+
+    <img src="Shoppinator background.png" id="genieImage" alt="Shoppinator Genie"/>
+  </div>
+
+44. I've positioned and resized the button now, how do I create a speech bubble in CSS.
+
+45. What's a nice font that fits with the cartoon like aesthetic
+
+46. I dont like that font its all capital letters for some reason.
+
+47. My website has this empty space on the left and right. Is there a way to add that blurred outer edge thing that many websites have
+    
+48. How do i use live server with dynamic webpages
+
+49. I'll just copy my html file and make it static by hardcoding some values. Will that work?
+
+50. I've decided to change my plans slightly. There's not enough space to stack everything vertically, so I'll have the instruction box on the left (i made a leftContainer class for it) and 3 items on the right (rightContainer class): question + input box, scores panel, finish questioning button. Can you update the css and add the new classes.
