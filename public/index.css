@@ -65,11 +65,8 @@ body::before {
     padding: 1.5%;
     max-width: 20%;
     z-index: 2;
-    font-size: clamp(0.5rem, 3vw, 2.7rem);
     display: flex;
     align-items: center;
-    font-family: 'Crimson Text', serif; /* ensure font is applied */
-    font-size: clamp(0.5rem, 2.5vw, 2.7rem);
 }
 
 .triangle {
@@ -106,7 +103,6 @@ body::before {
 #speech2 .triangle {
     left: 0%;
 }
-
 
 #startButton {
     position: absolute;
