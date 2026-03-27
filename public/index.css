@@ -10,9 +10,9 @@ p {
 }
 
 .hidden {
-    display: none !important; /* Ensures it overrides flex or fixed layouts */
-    visibility: hidden !important; /* Extra safeguard */
-    pointer-events: none !important; /* Prevent accidental clicks while hidden */
+    display: none !important; 
+    visibility: hidden !important; 
+    pointer-events: none !important; 
 }
 
 body {
@@ -37,7 +37,7 @@ body::before {
     z-index: -2;
 }
 
-.button {
+button {
     position: static;
 }
 
@@ -390,11 +390,10 @@ input[type="range"]::-webkit-slider-thumb {
     align-items: center;
 }
 
-/* Container for the buttons */
 #userButtonInputUI {
     display: flex;
-    gap: 1rem;                /* Space between buttons */
-    justify-content: center;  /* Center them horizontally */
+    gap: 1rem;                
+    justify-content: center;  
     margin-top: 1rem;
 }
 
@@ -402,7 +401,6 @@ input[type="range"]::-webkit-slider-thumb {
     display: none !important;
 }
 
-/* Common styles for both buttons */
 #userButtonInputUI button {
     font-family: 'Cinzel', serif;
     font-weight: 600;
@@ -418,7 +416,6 @@ input[type="range"]::-webkit-slider-thumb {
     min-width: 60%;
 }
 
-/* Yes button styling */
 #yesButton {
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     color: var(--navy);
@@ -430,7 +427,6 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 0.95;
 }
 
-/* Yes button styling */
 #noButton {
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     color: var(--navy);
@@ -442,28 +438,24 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 0.95;
 }
 
-/* Hide by default */
 #userNumericalInputUI.hidden {
     display: none !important;
 }
 
-/* Container for numerical input + label */
 #userNumericalInputUI {
     display: flex;
-    align-items: center;       /* Vertically align text and input */
-    gap: 0.75rem;              /* Space between the text and the input */
+    align-items: center;       
+    gap: 0.75rem;              
     margin-top: 1rem;
 }
 
-/* Instruction text */
 #numericalInputInstructions {
     font-family: 'Cinzel', serif;
     font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--gold-light);
-    white-space: nowrap;       /* Keep text on a single line */
+    white-space: nowrap;       
 }
 
-/* Style for the number input field */
 #numericalInput {
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--border);
@@ -472,32 +464,28 @@ input[type="range"]::-webkit-slider-thumb {
     font-family: 'Cinzel', serif;
     font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--text);
-    width: 30rem;               /* Adjust width as needed */
+    width: 30rem;               
     text-align: center;
 }
 
-/* Container for text input, reusing the numerical input styling */
 #userTextInputUI {
     display: flex;
-    align-items: center;       /* Align input vertically */
-    gap: 0.75rem;              /* Space between label (if added) and input */
+    align-items: center;       
+    gap: 0.75rem;              
     margin-top: 1rem;
 }
 
-/* Hide by default */
 #userTextInputUI.hidden {
     display: none !important;
 }
 
-/* Instruction text */
 #textInputInstructions {
     font-family: 'Cinzel', serif;
     font-size: clamp(0.5rem, 3vw, 2.5rem);
     color: var(--gold-light);
-    white-space: nowrap;       /* Keep text on a single line */
+    white-space: nowrap;       
 }
 
-/* Text input field */
 #textInput {
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--border);
@@ -506,11 +494,10 @@ input[type="range"]::-webkit-slider-thumb {
     font-family: 'Cinzel', serif;
     font-size: 1rem;
     color: var(--text);
-    width: 30rem;              /* Wider than number input for text */
+    width: 30rem;              
     font-size: clamp(0.5rem, 3vw, 2.5rem);
 }
 
-/* Container for the end questioning state */
 #endQuestioningState {
     position: fixed;
     inset: 0;
@@ -518,23 +505,21 @@ input[type="range"]::-webkit-slider-thumb {
     flex-direction: row;
     padding: 2%;
     gap: 2%;
-    background: #0a1931; /* dark blue background to match theme */
+    background: #0a1931;
 }
 
-/* Left half: Questions list */
 #sellerQuestionsListContainer {
     flex: 4;
     display: flex;
     flex-direction: column;
-    background: rgba(201, 168, 76, 0.04); /* subtle gold-tinted background */
+    background: rgba(201, 168, 76, 0.04); 
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 1.5rem 2rem;
     gap: 1rem;
-    overflow-y: auto; /* scroll if content exceeds height */
+    overflow-y: auto;
 }
 
-/* Scrollbar styling for left container */
 #sellerQuestionsListContainer::-webkit-scrollbar {
     width: 6px;
 }
@@ -552,7 +537,6 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: var(--gold-light);
 }
 
-/* Title styling */
 #sellerQuestionsTitle {
     font-family: 'Cinzel', serif;
     letter-spacing: 0.15em;
@@ -561,7 +545,6 @@ input[type="range"]::-webkit-slider-thumb {
     margin: 0 0 1rem 0;
 }
 
-/* Questions list styling */
 #sellerQuestionsList {
     list-style-type: disc;
     padding-left: 1.5rem;
@@ -576,7 +559,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #summaryPanel {
-    flex: 1; /* fills remaining space under scores panel */
+    flex: 1; 
 
     border: 1px solid var(--border);
     border-radius: 4px;
@@ -626,7 +609,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #tryAgainButton {
-    margin-top: auto; /* pushes it to bottom */
+    margin-top: auto; 
 
     font-family: 'Cinzel', serif;
     letter-spacing: 0.15em;
