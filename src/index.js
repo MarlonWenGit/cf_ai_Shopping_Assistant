@@ -22,6 +22,10 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
+    if (request.url.endsWith("/favicon.ico")) {
+      return new Response(null, { status: 204 });
+    }
+
     if (request.method !== "POST") {
       return new Response("Send a POST request with JSON body { prompt: '...' }", {
         status: 405, 
@@ -35,8 +39,6 @@ export default {
     } catch (err) {
       return new Response("Invalid JSON", { status: 400, headers: corsHeaders });
     }
-
-    let chat_history = body.chat_history.slice();
 
     if (body.promptType == "start") {
       body.chat_history.push(
@@ -61,7 +63,6 @@ export default {
 
     const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
       messages: body.chat_history,
-      system: PREPROMPT
     });
 
     return Response.json({ response: response.response, chat_history: body.chat_history }, { headers: corsHeaders });
