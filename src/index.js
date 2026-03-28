@@ -36,6 +36,8 @@ export default {
       return new Response("Invalid JSON", { status: 400, headers: corsHeaders });
     }
 
+    let chat_history = body.chat_history.slice();
+
     if (body.promptType == "start") {
       body.chat_history.push(
         { role: "assistant", content: "I have read and understood the preprompt. I am ready to begin." },
