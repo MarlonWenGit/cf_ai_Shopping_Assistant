@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e8cc7a;
+    --navy: #0a0e1a;
+    --navy-mid: #111827;
+    --navy-light: #1a2340;
+    --text: #e8dfc8;
+    --text-dim: #9a8f7a;
+    --border: rgba(201, 168, 76, 0.3);
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -10,16 +23,16 @@ p {
 }
 
 .hidden {
-    display: none !important; 
-    visibility: hidden !important; 
-    pointer-events: none !important; 
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Philosopher', serif;
-  font-size: clamp(0.5rem, 3rem, 2.7rem);
+    margin: 0;
+    padding: 0;
+    font-family: 'Philosopher', serif;
+    font-size: clamp(0.5rem, 1.2vw + 0.3rem, 1.35rem);
 }
 
 body::before {
@@ -29,10 +42,10 @@ body::before {
     pointer-events: none;
     background: linear-gradient(
         to right,
-        rgba(0, 0, 0, 0.9) 0%,      
-        #0a1931 15%,                
-        #0a1931 85%,                
-        rgba(0, 0, 0, 0.9) 100%     
+        rgba(0, 0, 0, 0.9) 0%,
+        #0a1931 15%,
+        #0a1931 85%,
+        rgba(0, 0, 0, 0.9) 100%
     );
     z-index: -2;
 }
@@ -50,12 +63,12 @@ button {
 }
 
 #genieImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: auto;
-  z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: auto;
+    z-index: 0;
 }
 
 .speechBubble {
@@ -116,19 +129,6 @@ button {
     cursor: pointer;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
-
-:root {
-    --gold: #c9a84c;
-    --gold-light: #e8cc7a;
-    --navy: #0a0e1a;
-    --navy-mid: #111827;
-    --navy-light: #1a2340;
-    --text: #e8dfc8;
-    --text-dim: #9a8f7a;
-    --border: rgba(201, 168, 76, 0.3);
-}
-
 #questioningState {
     position: fixed;
     inset: 0;
@@ -142,14 +142,11 @@ button {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; 
-    overflow-y: auto; 
-    padding-right: 10px; 
-}
-
-.leftContainer {
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding-right: 10px;
     scrollbar-width: thin;
-    scrollbar-color: var(--gold) transparent; 
+    scrollbar-color: var(--gold) transparent;
 }
 
 .leftContainer::-webkit-scrollbar {
@@ -175,7 +172,6 @@ button {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-
     min-height: 0;
 }
 
@@ -202,7 +198,7 @@ button {
     font-family: 'Crimson Text', serif;
     color: var(--text-dim);
     line-height: 1.7;
-    font-size: clamp(0.5rem, 3rem, 3rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.3rem, 1.5rem);
 }
 
 #instructionsBody em {
@@ -218,7 +214,7 @@ button {
     background: rgba(201, 168, 76, 0.04);
     padding: 1.5rem 2rem;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
@@ -235,7 +231,7 @@ button {
     line-height: 1.7;
     font-style: bold;
     margin: 0;
-    font-size: clamp(0.5rem, 3rem, 3.5rem);
+    font-size: clamp(0.5rem, 1.4vw + 0.3rem, 1.75rem);
 }
 
 .userInputUIs {
@@ -251,15 +247,15 @@ button {
     border: 1px solid var(--border);
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
 .scoresPanel {
-    flex: 1 1 auto;   
-    max-height: 42%;  
+    flex: 1 1 auto;
+    max-height: 42%;
     border: 1px solid var(--border);
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
@@ -269,9 +265,6 @@ button {
     gap: 1.2rem;
     overflow-y: auto;
     min-height: 0;
-}
-
-.scoresPanel {
     scrollbar-width: thin;
     scrollbar-color: var(--gold) transparent;
 }
@@ -315,13 +308,11 @@ button {
     text-align: right;
 }
 
-/* Firefox */
 #summaryPanel {
     scrollbar-width: thin;
     scrollbar-color: var(--gold) transparent;
 }
 
-/* Chrome, Edge, Safari */
 #summaryPanel::-webkit-scrollbar {
     width: 6px;
 }
@@ -373,7 +364,7 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
     width: 30%;
-    font-size: clamp(0.5rem, 3rem, 2rem);
+    font-size: clamp(0.5rem, 1vw + 0.2rem, 1rem);
 }
 
 #finishQuestioningButton:hover {
@@ -392,8 +383,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 #userButtonInputUI {
     display: flex;
-    gap: 1rem;                
-    justify-content: center;  
+    gap: 1rem;
+    justify-content: center;
     margin-top: 1rem;
 }
 
@@ -410,7 +401,7 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 2rem 2rem;
     border-radius: 4px;
     cursor: pointer;
-    font-size: clamp(0.5rem, 3rem, 2.5rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
     transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     min-width: 60%;
@@ -444,16 +435,16 @@ input[type="range"]::-webkit-slider-thumb {
 
 #userNumericalInputUI {
     display: flex;
-    align-items: center;       
-    gap: 0.75rem;              
+    align-items: center;
+    gap: 0.75rem;
     margin-top: 1rem;
 }
 
 #numericalInputInstructions {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3rem, 2.5rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
     color: var(--gold-light);
-    white-space: nowrap;       
+    white-space: nowrap;
 }
 
 #numericalInput {
@@ -462,16 +453,16 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3rem, 2.5rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
     color: var(--text);
-    width: 30rem;               
+    width: 30rem;
     text-align: center;
 }
 
 #userTextInputUI {
     display: flex;
-    align-items: center;       
-    gap: 0.75rem;              
+    align-items: center;
+    gap: 0.75rem;
     margin-top: 1rem;
 }
 
@@ -481,9 +472,9 @@ input[type="range"]::-webkit-slider-thumb {
 
 #textInputInstructions {
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 3rem, 2.5rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
     color: var(--gold-light);
-    white-space: nowrap;       
+    white-space: nowrap;
 }
 
 #textInput {
@@ -492,10 +483,9 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
     color: var(--text);
-    width: 30rem;              
-    font-size: clamp(0.5rem, 3rem, 2.5rem);
+    width: 30rem;
 }
 
 #endQuestioningState {
@@ -512,7 +502,7 @@ input[type="range"]::-webkit-slider-thumb {
     flex: 4;
     display: flex;
     flex-direction: column;
-    background: rgba(201, 168, 76, 0.04); 
+    background: rgba(201, 168, 76, 0.04);
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 1.5rem 2rem;
@@ -559,17 +549,14 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #summaryPanel {
-    flex: 1; 
-
+    flex: 1;
     border: 1px solid var(--border);
     border-radius: 4px;
     background: rgba(201, 168, 76, 0.04);
     padding: 1.5rem 2rem;
-
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-
     overflow-y: auto;
     min-height: 0;
 }
@@ -609,23 +596,20 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #tryAgainButton {
-    margin-top: auto; 
-
+    margin-top: auto;
     font-family: 'Cinzel', serif;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--navy);
-
     background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
     border: none;
     padding: 0.75rem 2rem;
     border-radius: 2px;
     cursor: pointer;
-
     font-weight: 700;
     box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-    font-size:clamp(0.5rem, 3rem, 2.5rem);
+    font-size: clamp(0.5rem, 1.2vw + 0.2rem, 1.25rem);
 }
 
 #tryAgainButton:hover {
