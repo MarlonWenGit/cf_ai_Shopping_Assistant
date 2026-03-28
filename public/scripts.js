@@ -130,7 +130,7 @@ function displayUserInput(inputType) {
 async function handlePrompt(prompt, promptType) {
   // Takes a prompt string, passes it to the AI chatbot, returns what the AI chatbot generated.
 
-  const response = await fetch("http://127.0.0.1:8787/api", {
+  const response = await fetch("https://shopping-assistant.marlonwen10.workers.dev/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt: prompt, promptType: promptType, chat_history: chat_history })
