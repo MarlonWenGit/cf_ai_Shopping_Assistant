@@ -28,6 +28,17 @@ loadingPlaceholder.textContent = loadingText;
 
 let chat_history = [];
 
+let photoCompletenessValueE = document.getElementById("photoCompletenessValueE");
+let photoAuthenticityValueE = document.getElementById("photoAuthenticityValueE");
+let descriptionDetailValueE = document.getElementById("descriptionDetailValueE");
+let conditionClarityValueE = document.getElementById("conditionClarityValueE");
+let descriptionReliabilityValueE = document.getElementById("descriptionReliabilityValueE");
+let priceRealismValueE = document.getElementById("priceRealismValueE");
+let priceJustificationValueE = document.getElementById("priceJustificationValueE");
+let sellerTransparencyValueE = document.getElementById("sellerTransparencyValueE");
+let sellerBehaviourValueE = document.getElementById("sellerBehaviourValueE");
+let scamRiskValueE = document.getElementById("scamRiskValueE");
+
 let photoCompletenessValue = document.getElementById("photoCompletenessValue");
 let photoAuthenticityValue = document.getElementById("photoAuthenticityValue");
 let descriptionDetailValue = document.getElementById("descriptionDetailValue");
@@ -49,6 +60,32 @@ const metrics = [
   sellerTransparencyValue,
   sellerBehaviourValue,
   scamRiskValue
+];
+
+const metricsE = [
+  photoCompletenessValueE,
+  photoAuthenticityValueE,
+  descriptionDetailValueE,
+  conditionClarityValueE,
+  descriptionReliabilityValueE,
+  priceRealismValueE,
+  priceJustificationValueE,
+  sellerTransparencyValueE,
+  sellerBehaviourValueE,
+  scamRiskValueE
+];
+
+const scores = [
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown",
+  "Unknown"
 ];
 
 let overallVerdictSummary = document.getElementById("overallVerdictSummary");
@@ -88,10 +125,10 @@ function displayNextUserQuestion(generatedText) {
 }
 
 function updateScoresUI(generatedText) {
-  const metricScores = generatedText.split("|").map(s => s.trim());
+  scores = generatedText.split("|").map(s => s.trim());
 
   for (i=0; i<metrics.length; i++) {
-    metrics[i].textContent = metricScores[i]
+    metrics[i].textContent = scores[i]
   }
 }
 
@@ -175,10 +212,17 @@ async function handleNoButton() {
   handleUserSubmit("No");
 }
 
+function giveScoresToEndScorePanel() {
+  for (i=0; i<metrics.length; i++) {
+    metricsE[i].textContent = scores[i]
+  }
+}
+
 async function handleFinishQuestioningButton() {
   hide(questioningState)
 
   sellerQuestionsList.appendChild(loadingPlaceholder)
+  giveScoresToEndScorePanel()
   show(endQuestioningState);
   const generatedText = await handlePrompt("", "finish questioning");
   sellerQuestionsList.removeChild(loadingPlaceholder)
